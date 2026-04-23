@@ -62,7 +62,7 @@
         </div>
     </header>
 
-    <main class="grid grid-cols-1  md:grid-cols-[minmax(0,300px)_2fr]  min-h-screen">
+    <main class="grid grid-cols-1  md:grid-cols-[minmax(0,300px)_2fr] lg:grid-cols-[minmax(0,300px)_2fr_minmax(0,300px)] min-h-screen">
 
         <aside id="sidebar"
             class="fixed md:sticky md:top-[65px] left-0 z-40 w-64   h-full md:h-[calc(100vh-65px)] bg-white  transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 shadow-lg md:shadow-none">
@@ -104,21 +104,24 @@
 
         <section class="p-6 w-full    flex flex-col items-center gap-3  bg-gray-100">
             <!-- Feed Header -->
-                     <div class="w-lg max-w-[95%]  ">
+                     <div class="max-w-lg w-[95%] self-start  ">
                         <h1 class="text-4xl text-black font-bold">Top Tier <span class="text-blue-800">talent.</span></h1>
+
                         <p class="text-lg mt-2 text-gray-600 w-lg text-justify   font-sans">Discover and connect with local's most disciplined creative professionals and technical experts</p>
                      </div>
+
             <div class="w-full  h-full  flex flex-col items-center gap-3">
+
                 <div id="feed"
-                    class="w-full   grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2  gap-3">
+                    class="w-full  ">
                     
 
                     
 
                      <div
-                        class="w-[95%]   mx-auto  bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                        class="w-[95%] max-w-md   mx-auto  bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
                         <!-- Freelancer header  -->
-                        <div class="w-full">
+                        <div class="w-full flex justify-between items-center">
                             <div class="flex items-center gap-3 p-4">
                                 <div class="h-10 w-10 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
                                     <!-- Profile Image -->
@@ -129,21 +132,34 @@
                                     <p class="text-sm text-blue-500">Senior UX Designer</p>
                                 </div>
                             </div>
+                            <!-- rating  -->
+                            <div class="p-2 bg-gray-100 mr-1 rounded-lg">
+                                <span class="text-black flex items-center "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"  fill="oklch(62.3% 0.214 259.815)"
+                                    stroke="currentColor"
+                                    stroke-width="0"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">>
+  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+</svg> 4.8 <span class="text-gray-500 px-1 text-sm">(94 reviews)</span></span>
+                                
+                            </div> 
                         </div>
 
                         
                         <div class="px-4  pb-3">
-                            <p class="text-sm max-h-10 truncate text-gray-700 leading-relaxed">
+                            <p class="text-sm freelacer-description  text-gray-700 leading-relaxed">
+                                Specialized in creating high-conversion digital experiences for Fintech and SaaS. I turn complex data into human-centric interfaces.
+                                Specialized in creating high-conversion digital experiences for Fintech and SaaS. I turn complex data into human-centric interfaces.
                                 Specialized in creating high-conversion digital experiences for Fintech and SaaS. I turn complex data into human-centric interfaces.
                             </p>
                             
                         </div>
                         <!-- skills -->
                          <div class="flex items-center p-2 gap-3">
-                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-300 rounded-xl transition-all hover:bg-gray-400 text-sm hover:px-3.5 hover:py-2.5" >Figma</button>
-                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-300 rounded-xl transition-all hover:bg-gray-400 text-sm hover:px-3.5 hover:py-2.5" >Prototyping</button>
-                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-300 rounded-xl transition-all hover:bg-gray-400 text-sm hover:px-3.5 hover:py-2.5" >UI Design</button>
-                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-300 rounded-xl transition-all hover:bg-gray-400 text-sm hover:px-3.5 hover:py-2.5" >React</button>
+                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-100 rounded-xl transition-all hover:bg-gray-200 text-sm " >Figma</button>
+                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-100 rounded-xl transition-all hover:bg-gray-200 text-sm " >Prototyping</button>
+                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-100 rounded-xl transition-all hover:bg-gray-200 text-sm " >UI Design</button>
+                            <button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-100 rounded-xl transition-all hover:bg-gray-200 text-sm " >React</button>
                          </div>
                         <div class="px-4 flex justify-end  pb-3">
                             <!-- make offer Icon Button -->
@@ -177,14 +193,82 @@
 
         </section>
 
+        <aside id="filter" class="fixed md:sticky md:top-[65px] right-0 z-40 w-64   h-full md:h-[calc(100vh-65px)] bg-white  transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 shadow-lg md:shadow-none">
+            <div class="bg-surface-container-low rounded-xl p-8 sticky top-32">
+<h4 class="text-xl font-bold mb-8">Refine Search</h4>
+<div class="space-y-8">
+<!-- Skill Filter -->
+<div>
+<label class="text-xs font-black uppercase tracking-widest text-on-surface-variant block mb-4">Core Skills</label>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">UI / UX Design</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Frontend Dev</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Product Management</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Data Analysis</span>
+</label>
+</div>
+</div>
+<!-- Budget Slider -->
+<div>
+<label class="text-xs font-black uppercase tracking-widest text-on-surface-variant block mb-4">Hourly Rate ($)</label>
+<div class="relative h-1.5 w-full bg-surface-container-highest rounded-full mb-4">
+<div class="absolute left-1/4 right-1/4 h-full bg-primary rounded-full"></div>
+<div class="absolute left-1/4 -top-1.5 w-4 h-4 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer"></div>
+<div class="absolute right-1/4 -top-1.5 w-4 h-4 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer"></div>
+</div>
+<div class="flex justify-between text-xs font-bold text-on-surface">
+<span>$45/hr</span>
+<span>$150/hr+</span>
+</div>
+</div>
+<!-- Availability -->
+<div>
+<label class="text-xs font-black uppercase tracking-widest text-on-surface-variant block mb-4">Availability</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 bg-surface-container-highest text-xs font-bold rounded-lg border border-transparent hover:border-primary/30 transition-all">Immediate</button>
+<button class="py-2 px-3 bg-primary-fixed/20 text-primary text-xs font-bold rounded-lg border border-primary/20">Next 7 Days</button>
+<button class="py-2 px-3 bg-surface-container-highest text-xs font-bold rounded-lg border border-transparent hover:border-primary/30 transition-all">Next 2 Weeks</button>
+<button class="py-2 px-3 bg-surface-container-highest text-xs font-bold rounded-lg border border-transparent hover:border-primary/30 transition-all">Next Month</button>
+</div>
+</div>
+<button class="w-full py-4 bg-on-background text-white font-bold rounded-xl hover:opacity-90 transition-opacity">
+                                Apply Changes
+                            </button>
+</div>
+</div>
+
+        </aside>
+
 
 
     </main>
 
     <script>
-    //     function toggleMenu() {
-    //         document.getElementById('sidebar').classList.toggle('-translate-x-full');
-    //     }
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+        }
+
+        function descriptionOverflow(){
+            const description = document.querySelectorAll(".freelacer-description")
+            description.forEach(element =>{
+                const content  = element.textContent
+                if (content.length > 250){
+                    element.textContent = content.substring(0,250) + "..."
+                }
+            })
+        }
+        descriptionOverflow()
 
     //     const times = ['hours','menutes','days','months']
     //     // here i used some js to make infinit scroll 
