@@ -50,13 +50,20 @@
                 </span>
             </a>
 
-            <a href="login.html"
+            <a id="anonymousUser" href="login.html"
                 class="p-2 text-gray-500 border border-gray-300 hover:bg-gray-50 hover:border-gray-400 rounded-lg transition-all focus:outline-none">
                 <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
+            </a>
+            <a id="realUser" href="#"
+                class="hidden p-2  hover:bg-gray-50 hover:border-gray-400 rounded-lg transition-all focus:outline-none">
+                <div class="h-10 w-10 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
+                                
+                    <img src="https://i.pravatar.cc/370" alt="avatar">
+                </div>
             </a>
         </div>
     </header>

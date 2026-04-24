@@ -3,8 +3,15 @@ const feed = document.getElementById('feed');
 const loader = document.getElementById('loader');
 
 const times = ['hours', 'menutes', 'days', 'months']
-
-
+let isLogedIn = false
+const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+if (currentUser){
+    isLogedIn = true
+}
+if (isLogedIn){
+    document.getElementById('anonymousUser').classList.add("hidden")
+    document.getElementById('realUser').classList.remove("hidden")
+}
 function fillLikeIcon(e) {
     const svg = e.currentTarget.children[0]
     if (svg.style.fill === 'none') {

@@ -5,7 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../dist/home.css">
-
+    <style>
+        input[type='range']::-webkit-slider-thumb {
+            width: 18px;
+            height: 18px;
+            background: white;
+            border: 2px solid #2563eb;
+            /* blue-600 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
     <title>Golocaloop</title>
 </head>
 
@@ -286,22 +297,34 @@
                         </div>
                     </div>
                     <!-- Budget Slider -->
-                    <div>
-                        <label
-                            class="text-xs font-black uppercase tracking-widest text-on-surface-variant block mb-4">Hourly
-                            Rate ($)</label>
-                        <div class="relative h-1.5 w-full bg-surface-container-highest rounded-full mb-4">
-                            <div class="absolute left-1/4 right-1/4 h-full bg-primary rounded-full"></div>
-                            <div
-                                class="absolute left-1/4 -top-1.5 w-4 h-4 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer">
+                    <div class="w-full max-w-md p-6 bg-white rounded-xl shadow-md">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Price Range</h3>
+
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-500 uppercase font-semibold">Min</span>
+                                <div class="flex items-center text-indigo-600 font-mono font-bold">
+                                    <span>$</span><span id="minPriceDisplay">200</span>
+                                </div>
                             </div>
-                            <div
-                                class="absolute right-1/4 -top-1.5 w-4 h-4 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer">
+                            <div class="h-px w-8 bg-gray-300"></div>
+                            <div class="flex flex-col items-end">
+                                <span class="text-xs text-gray-500 uppercase font-semibold">Max</span>
+                                <div class="flex items-center text-indigo-600 font-mono font-bold">
+                                    <span>$</span><span id="maxPriceDisplay">800</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="flex justify-between text-xs font-bold text-on-surface">
-                            <span>$45/hr</span>
-                            <span>$150/hr+</span>
+
+                        <div class="relative h-2 w-full bg-gray-200 rounded-full">
+                            <div id="sliderHighlight" class="absolute h-2 bg-indigo-500 rounded-full"
+                                style="left: 20%; right: 20%;"></div>
+
+                            <input type="range" id="minRange" min="0" max="1000" value="200"
+                                class="absolute w-full h-2 appearance-none bg-transparent pointer-events-none cursor-pointer z-10 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-indigo-500 [&::-webkit-slider-thumb]:rounded-full">
+
+                            <input type="range" id="maxRange" min="0" max="1000" value="800"
+                                class="absolute w-full h-2 appearance-none bg-transparent pointer-events-none cursor-pointer z-10 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-indigo-500 [&::-webkit-slider-thumb]:rounded-full">
                         </div>
                     </div>
 
@@ -330,7 +353,42 @@
         function openMobileSearchBar() {
             document.getElementById('mobileSearchBar').classList.toggle('hidden');
         }
+        const minInput = document.getElementById('minRange');
+        const maxInput = document.getElementById('maxRange');
+        const minDisplay = document.getElementById('minPriceDisplay');
+        const maxDisplay = document.getElementById('maxPriceDisplay');
+        const highlight = document.getElementById('sliderHighlight');
 
+        function updateSlider() {
+            const minVal = parseInt(minInput.value);
+            const maxVal = parseInt(maxInput.value);
+            const totalMax = parseInt(minInput.max);
+
+
+            if (minVal > maxVal - 50) {
+                minInput.value = maxVal - 50;
+            }
+            if (maxVal < minVal + 50) {
+                maxInput.value = minVal + 50;
+            }
+
+
+            minDisplay.textContent = minInput.value;
+            maxDisplay.textContent = maxInput.value;
+
+
+            const leftPercent = (minInput.value / totalMax) * 100;
+            const rightPercent = 100 - (maxInput.value / totalMax) * 100;
+
+            highlight.style.left = leftPercent + "%";
+            highlight.style.right = rightPercent + "%";
+        }
+
+        minInput.addEventListener('input', updateSlider);
+        maxInput.addEventListener('input', updateSlider);
+
+
+        updateSlider();
         function descriptionOverflow() {
             const description = document.querySelectorAll(".freelacer-description")
             description.forEach(element => {
@@ -393,7 +451,7 @@
         ];
         //     // here i used some js to make infinit scroll 
         function loadRandomPost() {
-            
+
 
             profiles =
             {
@@ -402,7 +460,7 @@
 
                 jobTitle: jobs[Math.floor(Math.random() * jobs.length)],
                 rating: parseFloat((Math.random() * 2 + 3).toFixed(1)),
-                reviewCount: Math.floor(Math.random() * (1000-90)) + 90,
+                reviewCount: Math.floor(Math.random() * (1000 - 90)) + 90,
                 skills: skillsList[Math.floor(Math.random() * skillsList.length)],
                 profileDes: Descs[Math.floor(Math.random() * Descs.length)]
             }
@@ -416,16 +474,16 @@
         function getPost() {
 
             post = loadRandomPost()
-            let skills =''
-            post.skills.forEach(skill =>{
+            let skills = ''
+            post.skills.forEach(skill => {
                 skills += `<button class="outline-0 border-0 py-2 px-3 text-black font-medium bg-gray-100 rounded-xl transition-all hover:bg-gray-200 text-sm ">
                                 ${skill}
                             </button>
                             `
             })
-            
-            const newPost = 
-            `
+
+            const newPost =
+                `
                 <div class="w-[95%] max-w-sm  bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
                         <!-- Freelancer header  -->
                         <div class="w-full flex justify-between items-center">

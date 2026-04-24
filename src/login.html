@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../dist/login_register.css">
     <title>Sign In</title>
 </head>
+
 <body>
     <div class=" container">
         <div class="header">
             <h2>Sign In</h2>
             <p>
-               Don't have an Account
+                Don't have an Account
                 <a href="register.html">Sign up</a>
             </p>
         </div>
@@ -22,33 +24,25 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <div class="input-wrapper">
-                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        placeholder="Email"
-                    />
+                    <input type="email" id="email" name="email" required placeholder="Email" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="input-wrapper password-field">
-                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-3-3H9a3 3 0 00-3 3v4h12V7z" />
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-3-3H9a3 3 0 00-3 3v4h12V7z" />
                     </svg>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                        placeholder="Enter your Password"
-                    />
-                    
+                    <input type="password" id="password" name="password" required placeholder="Enter your Password" />
+
                 </div>
             </div>
 
@@ -59,14 +53,63 @@
                 </div>
                 <a href="#" class="forgot-password">Forgot password ?</a>
             </div>
+            <div id="error" class=" text-red-600 text-sm hidden ">
 
+            </div>
             <button type="submit" class="submit-btn" id="submitBtn">Login</button>
 
-            
+
         </form>
     </div>
 
-        
+
+    <script>
+        async function hashString(password) {
+            const msgUint8 = new TextEncoder().encode(password)
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8)
+            const hashArray = Array.from(new Uint8Array(hashBuffer))
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+            return hashHex;
+        }
+
+        const handleLogin = async (email, pass) => {
+            const db = JSON.parse(localStorage.getItem('users_db')) || [];
+            const password = await hashString(pass)
+            const user = db.find(u => u.email === email && u.password === password )
+            console.log(user)
+            if (user) {
+
+                const sessionUser = { ...user };
+                delete sessionUser.password; // we delete password here because of safety 
+                localStorage.setItem('currentUser', JSON.stringify(sessionUser))
+                return { success: true }
+            }
+            else{
+                return { success: false, message: "Invalid email or password" };
+            }
+        }
+
+        const form = document.getElementById("loginForm")
+        const errorMessage = document.getElementById('error')
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            }
+            const status = await handleLogin(formData.email,formData.password)
+            
+            if (!status.success){
+                errorMessage.textContent = status.message
+                errorMessage.classList.remove('hidden');
+            }else{
+                window.location.replace("index.html") // to open home page
+            }
+            
+        })
+    </script>
 
 </body>
+
 </html>

@@ -1,100 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../dist/login_register.css">
     <title>Sign Up</title>
 </head>
-<body>
-    
 
-        <div class="container">
+<body>
+
+
+    <div class="container">
         <div class="header">
             <h2>Sign Up</h2>
             <p>
-               Already have an Account
+                Already have an Account
                 <a href="login.html">Sign in</a>
             </p>
         </div>
 
-        <form class="form"  method="get" id="form">
+        <form class="form" method="get" id="form">
             <div class="error-message" id="errorMessage"></div>
 
             <div class="form-group">
                 <label for="username">Username *</label>
                 <div class="input-wrapper">
-                    
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        required
-                        placeholder="UserName"
-                    />
+
+                    <input type="text" id="username" name="username" required placeholder="UserName" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email *</label>
                 <div class="input-wrapper">
-                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        placeholder="Email"
-                    />
+                    <input type="email" id="email" name="email" required placeholder="Email" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password">Password *</label>
                 <div class="input-wrapper password-field">
-                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-3-3H9a3 3 0 00-3 3v4h12V7z" />
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-3-3H9a3 3 0 00-3 3v4h12V7z" />
                     </svg>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                        placeholder="Enter your Password"
-                    />
-                    
+                    <input type="password" id="password" name="password" required placeholder="Enter your Password" />
+
                 </div>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password *</label>
                 <div class="input-wrapper password-field">
-                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-3-3H9a3 3 0 00-3 3v4h12V7z" />
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-3-3H9a3 3 0 00-3 3v4h12V7z" />
                     </svg>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        required
-                        placeholder="Confirm your Password"
-                    />
-                    
+                    <input type="password" id="confirmPassword" name="confirmPassword" required
+                        placeholder="Confirm your Password" />
+
                 </div>
             </div>
 
             <div id="error" class=" text-red-600 text-sm hidden ">
-                
+
             </div>
-                
+
 
             <button type="submit" class="submit-btn" id="submitBtn">Sign Up</button>
 
-            
+
         </form>
     </div>
 
     <script>
+        const handleRegistration = (newUserData) => {
+
+            const db = JSON.parse(localStorage.getItem('users_db')) || [];
+            const exists = db.some(user => user.email === newUserData.email)
+            if (exists) {
+                return "Account already exists!"
+            }
+            db.push(newUserData)
+            localStorage.setItem('users_db', JSON.stringify(db))
+
+            return "User registered successfully!"
+        }
+
+        async function hashString(password) {
+            const msgUint8 = new TextEncoder().encode(password)
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8)
+            const hashArray = Array.from(new Uint8Array(hashBuffer))
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+            return hashHex;
+        }
+
+        
+
 
         const form = document.getElementById("form")
         const errorMessage = document.getElementById('error')
@@ -102,14 +110,14 @@
             e.preventDefault();
 
             const formData = {
-                
+
                 userName: document.getElementById('username').value,
                 email: document.getElementById('email').value,
-                
+
                 password: document.getElementById('password').value,
                 confirmPassword: document.getElementById('confirmPassword').value,
-                
-            };
+
+            }
 
             // اchecking if paasword and confirm password are matched 
             if (formData.password !== formData.confirmPassword) {
@@ -117,15 +125,27 @@
                 errorMessage.classList.remove('hidden');
                 return;
             }
-            if (formData.password.length < 6){
+            if (formData.password.length < 6) {
                 errorMessage.textContent = 'password must be at least 6 characters';
                 errorMessage.classList.remove('hidden');
                 return
             }
-            if (form.checkValidity()){
-                form.submit()
+            if (form.checkValidity()) {
+                const newUser = {
+                    id: Date.now(),
+                    username: formData.userName,
+                    email: formData.email,
+                    password: await hashString(formData.password),
+                    joinedDate: new Date().toISOString()
+                }
+                const btn = document.getElementById("submitBtn")
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                btn.textContent = handleRegistration(newUser)
+                
             }
         })
     </script>
 </body>
+
 </html>
