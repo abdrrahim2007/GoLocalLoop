@@ -190,10 +190,11 @@
         const realUserImg = document.getElementById('realUserImg')
         let isLogedIn = false
         const currentUser = JSON.parse(localStorage.getItem('currentUser'))
-        if (!isLogedIn){document.getElementById('logout').classList.add("hidden")}
+        
         if (currentUser) {
             isLogedIn = true
         }
+        if (!isLogedIn){document.getElementById('logout').classList.add("hidden")}
         if (isLogedIn) {
             document.getElementById('anonymousUser').classList.add("hidden")
             realUser.classList.remove("hidden")
