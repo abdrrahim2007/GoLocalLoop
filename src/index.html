@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="icons/icon.png">
+    <link rel="apple-touch-icon" href="icons/icon.png">
+    <link rel="shortcut icon" sizes="192x192" href="icons/icon.png">
     <link rel="stylesheet" href="dist/home.css">
     <title>Golocaloop</title>
 </head>
@@ -37,6 +40,14 @@
         </div>
 
         <div class="flex gap-2 items-center">
+            <button onclick="openMobileSearchBar()"
+                class="sm:hidden p-2 text-gray-500 border border-gray-300 hover:bg-gray-100 rounded-xl transition-colors focus:outline-none">
+                <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://w3.org" fill="none"
+                    viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+            </button>
             <button onclick="chatOpen()"
                 class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full transition-colors focus:outline-none">
                 <svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -105,24 +116,38 @@
                     </svg>
                     <span class="text-sm font-medium">Marketplace</span>
                 </a>
-                
-                    <button id="logout" onclick="localStorage.removeItem('currentUser'); location.reload();"
-                        class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors group mb-4">
-                        <svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16 17 21 12 16 7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                        <span class="text-sm font-medium">Logout</span>
-                    </button>
-                
+
+                <button id="logout" onclick="localStorage.removeItem('currentUser'); location.reload();"
+                    class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors group mb-4">
+                    <svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="text-sm font-medium">Logout</span>
+                </button>
+
 
 
             </nav>
         </aside>
 
         <section class="p-6 w-full  h-full  flex flex-col items-center gap-3  bg-gray-100">
+            <div id="mobileSearchBar" class="fixed hidden w-[90%] max-w-md  place-items-center sm:hidden">
+                <div class="w-full relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://w3.org" fill="none"
+                            viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input type="search"
+                        class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                        placeholder="Search..." required>
+                </div>
+            </div>
             <div class="w-full  h-full  flex flex-col items-center gap-3">
                 <div id="feed" class="w-full  h-full  flex flex-col items-center gap-3">
                     <div

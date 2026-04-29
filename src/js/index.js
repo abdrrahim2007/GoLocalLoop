@@ -16,6 +16,9 @@ if (isLogedIn) {
     realUser.classList.remove("hidden")
     realUserImg.src = currentUser.profile
 }
+function openMobileSearchBar() {
+    document.getElementById('mobileSearchBar').classList.toggle('hidden');
+}
 function fillLikeIcon(e) {
     if (isLogedIn) {
         const svg = e.currentTarget.children[0]
