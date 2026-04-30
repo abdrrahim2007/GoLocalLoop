@@ -19,4 +19,4 @@
 - **Secure Auth**: Custom hashing for passwords before LocalStorage registration.
 
 ##  Links
-- **Demo**: [Live Preview](https://golocalloop.vercel.app/)[cite: 1]
+- **Demo**: [Live Preview](https://golocalloop.vercel.app/)
